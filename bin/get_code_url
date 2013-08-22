@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vkdr.php';
+require __DIR__.'/../config.php';
+echo vkdr\oauth_url()."\n";

@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vkdr.php';
+require __DIR__.'/../config.php';
+
+vkdr\create_wrappers(true);
+
+def('vkdr\on_error', function($r){
+  echo "Error =(:\n";
+  print_R($r);
+});
+
+echo "Result:\n";
+print_R(photos_getAlbums());

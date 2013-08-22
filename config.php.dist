@@ -1,0 +1,12 @@
+<?php
+// Настройки для вспомогательных файлов
+
+// Глобальные
+vkdr\app_secret('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+vkdr\app_host('http://dev.domain.tld');
+vkdr\app_oauth_url('vk_oauth_code.php');
+vkdr\app_id(0000000000);
+vkdr\app_scope(array('ads', 'friends'));
+
+// На каждого пользователя надо вызывать, перед дёрганьем методов api
+vkdr\token('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
