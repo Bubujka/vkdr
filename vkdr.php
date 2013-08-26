@@ -47,6 +47,7 @@ def('vkdr\get_token_obj', function($code){
 def('vkdr\on_error', function(){});
 def('vkdr\method', function($method, $params = array()){
   // Документация по доступу к апи: http://vk.com/dev/api_requests
+  $params['v'] = vkdr\api_version();
   $params['access_token'] = vkdr\token();
   $query = vkdr\api_url().'/method/'.$method.'?'.http_build_query($params);
   $r = json_decode(file_get_contents($query), true);
