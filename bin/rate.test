@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vkdr.php';
+require __DIR__.'/../config.php';
+
+def('vkdr\on_error', function($r){
+  echo "Error =(:\n";
+  print_R($r);
+});
+vkdr\rate_limiting(true);
+$t = vkdr\ads_getAccounts();
+vkdr\ads_getAccounts();
+vkdr\ads_getCampaigns(array('account_id'=>$t[0]['account_id']));
+vkdr\ads_getCampaigns(array('account_id'=>$t[0]['account_id']));
+vkdr\ads_getCampaigns(array('account_id'=>$t[0]['account_id']));
+vkdr\ads_getCampaigns(array('account_id'=>$t[0]['account_id']));
+

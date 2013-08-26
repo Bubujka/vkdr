@@ -44,9 +44,17 @@ def('vkdr\get_token_obj', function($code){
   return json_decode(file_get_contents('https://oauth.vk.com/access_token?'.http_build_query($p)), true);
 });
 
+def_accessor('vkdr\rate_limiting', false);
+def('vkdr\waaaait', function(){
+  usleep(500000);
+});
+
 def('vkdr\on_error', function(){});
 def('vkdr\method', function($method, $params = array()){
   // Документация по доступу к апи: http://vk.com/dev/api_requests
+  if(vkdr\rate_limiting())
+    vkdr\waaaait();
+
   $params['v'] = vkdr\api_version();
   $params['access_token'] = vkdr\token();
   $query = vkdr\api_url().'/method/'.$method.'?'.http_build_query($params);
