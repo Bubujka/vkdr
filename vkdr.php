@@ -51,11 +51,27 @@ def('vkdr\method', function($method, $params = array()){
   $params['access_token'] = vkdr\token();
   $query = vkdr\api_url().'/method/'.$method.'?'.http_build_query($params);
   $r = json_decode(file_get_contents($query), true);
-  if(isset($r['error'])){
+  if(isset($r['error']))
     return vkdr\on_error($r['error']);
-  }elseif(isset($r['response'])){
+  elseif(isset($r['response']))
     return $r['response'];
-  }
+  
+});
+
+/*
+  vkdr\send_img($url, array('file1'=>'@'.__DIR__.'/img.jpg'));
+*/
+def('vkdr\send_img', function($url, $post){
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_HEADER, 0);
+  curl_setopt($ch, CURLOPT_VERBOSE, 0);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $post); 
+  $data = curl_exec($ch);
+  curl_close($ch);
+  return $data;
 });
 
 def('vkdr\create_wrappers', function($in_global_namespace = false){
@@ -70,3 +86,4 @@ def('vkdr\create_wrappers', function($in_global_namespace = false){
   
 });
 vkdr\create_wrappers();
+

@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vkdr.php';
+require __DIR__.'/../config.php';
+
+vkdr\create_wrappers(true);
+
+def('vkdr\on_error', function($r){
+  echo "Error =(:\n";
+  print_R($r);
+  exit;
+});
+
+
+$albums = photos_getAlbums();
+$first_album_id = $albums['items'][0]['id'];
+
+$t = photos_getUploadServer(array('album_id'=>$first_album_id));
+$url = $t['upload_url'];
+
+$data = json_decode(vkdr\send_img($url, array('file1'=>'@'.__DIR__.'/img.jpg')), true);
+$data['album_id'] = $first_album_id;
+$photo_info = photos_save($data);
