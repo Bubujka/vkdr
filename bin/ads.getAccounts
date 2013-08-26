@@ -1,0 +1,6 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vkdr.php';
+require __DIR__.'/../config.php';
+
+print_R(vkdr\ads_getAccounts());

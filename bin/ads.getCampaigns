@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vkdr.php';
+require __DIR__.'/../config.php';
+
+foreach(vkdr\ads_getAccounts() as $account){
+  $account['campaigns'] = vkdr\ads_getCampaigns(array('account_id'=>$account['account_id']));
+  print_R($account);
+}
